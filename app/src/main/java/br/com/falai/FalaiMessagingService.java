@@ -129,6 +129,7 @@ public final class FalaiMessagingService extends FirebaseMessagingService {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pending).setAutoCancel(true).setOnlyAlertOnce(true).setVisibility(NotificationCompat.VISIBILITY_PRIVATE);
         String tag = messageId != null && messageId.matches("[a-f0-9-]{36}") ? messageId : chatId;
+        notification.addAction(NotificationReplyReceiver.action(this, recipient, chatId, tag));
         NotificationManagerCompat.from(this).notify(tag, 0, notification.build());
         if (nudge) MessageSound.playNudge(this, recipient + ":" + tag); else MessageSound.play(this, recipient + ":" + tag);
         if (NotificationAvatar.refresh(senderId) && recipient.equals(Backend.uid())
@@ -145,7 +146,7 @@ public final class FalaiMessagingService extends FirebaseMessagingService {
     }
     private boolean notificationStillVisible(String tag) {
         for (android.service.notification.StatusBarNotification notice : getSystemService(NotificationManager.class).getActiveNotifications())
-            if (notice.getId() == 0 && tag.equals(notice.getTag())) return true;
+            if (notice.getId() == 0 && tag.equals(notice.getTag()) && !notice.getNotification().extras.getBoolean("falai_reply_status")) return true;
         return false;
     }
 }

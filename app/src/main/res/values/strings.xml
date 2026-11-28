@@ -115,6 +115,9 @@
     <string name="remove_reaction">Remover reação</string>
     <string name="message_reactions">Reações: %1$s</string>
     <string name="reply_message">Responder</string>
+    <string name="notification_reply_queued">Resposta na fila de envio.</string>
+    <string name="notification_reply_sent">Resposta enviada.</string>
+    <string name="notification_reply_failed">Não foi possível enviar a resposta. Abra a conversa.</string>
     <string name="reply_you">Você</string>
     <string name="cancel_reply">Cancelar resposta</string>
     <string name="reply_unavailable">Mensagem original indisponível</string>
